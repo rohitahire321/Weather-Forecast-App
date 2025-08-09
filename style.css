@@ -1,13 +1,32 @@
+
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 body{
+    position: relative;
     background-image: url(R.jpeg);
-    backdrop-filter: blur(8px);
+    /* backdrop-filter: blur(8px); */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     height: 100vh;
+}
+body::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(6px);
+    z-index: -1;
+}
+@keyframes slide{
+    0%{
+        transform:translateX(0)
+    }
+    100%{
+        transform:translateX(100%)
+    }
 }
