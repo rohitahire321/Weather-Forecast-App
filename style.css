@@ -30,3 +30,123 @@ body::before {
         transform:translateX(100%)
     }
 }
+@media (min-width: 375px) and (max-width: 667px){
+    
+    /* Your iPhone SE-specific styles */
+    *{
+        background-color: white;
+    }
+    #div1 p{
+        background-color: skyblue;
+        color: black ;
+    }
+    #div2 p,img,h2{
+        background-color: skyblue;
+        text-align: center;
+    }
+    h1 {
+        animation: none !important;
+        background-color: skyblue;
+        text-decoration: none !important;
+        font-size: 1.2rem !important;
+        text-align: center;
+        color: black !important;
+    }
+    #div0 {
+        width: 100vw;
+        flex-direction: column;
+        gap: 10px;
+        justify-content: center;
+    }
+    #div1, #div2 {
+        font-size: 1.2rem !important;
+        width: auto;
+        margin-left: 20px;
+        background-color: skyblue;
+        margin-right: 20px;
+        height: auto;
+    }
+    #div3 {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    #div3 div{
+        border: 2px solid;
+        padding-top: 1px;
+    }
+    #div3 div p{
+        text-align: center;
+    }
+    #div3 div > p{
+        color: black;
+    }
+    #div3 div:hover{
+        scale: 1.5;
+    }
+    header h1:hover{
+        background-color: rgb(238, 11, 102) !important;
+    }
+    #div1 #searchBtn:hover{
+        background-color: rgb(238, 11, 102) !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px){
+    
+    *{
+        background-color: white;
+    }
+    header h1:hover{
+        background-color: rgb(238, 11, 102) !important;
+    }
+    #div1 #searchBtn:hover{
+        background-color: rgb(238, 11, 102) !important;
+    }
+    #div1 p{
+        background-color: skyblue;
+        color: black ;
+    }
+    #div2 p,img,h2{
+        background-color: skyblue;
+        text-align: center;
+    }
+    h1 {
+        animation: none !important;
+        background-color: skyblue;
+        text-decoration: none !important;
+        font-size: 1.2rem !important;
+        text-align: center;
+        color: black !important;
+    }
+    #div0 {
+        width: 100vw;
+        flex-direction: column;
+        gap: 10px;
+        justify-content: center;
+    }
+    #div1, #div2 {
+        font-size: 1.2rem !important;
+        width: auto;
+        margin-left: 20px;
+        background-color: skyblue;
+        margin-right: 20px;
+        height: auto;
+    }
+    #div3 {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    #div3 div{
+        border: 2px solid;
+        padding-top: 1px;
+    }
+    #div3 div:hover{
+        scale: 1.5;
+    }
+    #div3 div p{
+        text-align: center;
+    }
+    #div3 div > p{
+        color: black;
+    }
+}
