@@ -7,11 +7,21 @@ const API_KEY = "550ca14fd13d481aa18184603250608"; // Replace with your WeatherA
     const input1 = document.getElementById("input1");
     const locat = document.getElementById("location");
     const search = document.getElementById("searchBtn");
+    const cityList = document.getElementById("citylist")
 
+    //Load Saved weather Data.
     const savedData = localStorage.getItem("weatherData")
     if(savedData){
         displayweather(JSON.parse(savedData))
     }
+
+    let savedCities = JSON.parse(localStorage.getItem("cities")) || [];
+    updateDropdown(savedCities);
+
+    window.addEventListener("load", () => {
+        localStorage.removeItem("cities");
+    });
+
 
     search.addEventListener("click", () => {
     const city = input1.value.trim();
@@ -19,13 +29,30 @@ const API_KEY = "550ca14fd13d481aa18184603250608"; // Replace with your WeatherA
         alert("Please! Enter a Valid City, I don't have time");
         return;
     }
-
+    
+    // If city is new, save to list & localStorage
+    if (!savedCities.includes(city)) {
+        savedCities.unshift(city); // put most recent first
+        localStorage.setItem("cities", JSON.stringify(savedCities));
+        updateDropdown(savedCities);
+    }
         getweather(city);
     });
 
     locat.addEventListener("click", () => {
         getCurrentLocation()
     })
+    
+    function updateDropdown(cities) {
+        cityList.innerHTML = cities.map(c => `<option value="${c}"></option>`).join("");
+    }
+
+    input1.addEventListener("change", () => {
+    const selectedCity = input1.value.trim();
+    if (savedCities.includes(selectedCity)) {
+        getweather(selectedCity);
+    }
+    });
 
     function getweather(city) {
     const url = `https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${city}&days=5&aqi=no&alerts=no`;
@@ -40,10 +67,12 @@ const API_KEY = "550ca14fd13d481aa18184603250608"; // Replace with your WeatherA
             displayweather(data);
         })
         .catch((error) => {
+            //there is no need to validate city because if i write a no. then also it can catch error.
+            alert("Enter name of a Valid City.")
             div2.innerHTML = `<p class="text-white text-xl">${error.message}<p>`;
         });
     }
-    
+
     function getCurrentLocation() {
     if(navigator.geolocation){
         navigator.geolocation.getCurrentPosition(success,error)
@@ -61,6 +90,7 @@ const API_KEY = "550ca14fd13d481aa18184603250608"; // Replace with your WeatherA
         getweatherByCoords(latitude,longitude)
     }
     function error(err){
+        alert("Something Went Wrong!")
         console.log("Error getting location:",err)
     }
 }
@@ -78,10 +108,16 @@ const API_KEY = "550ca14fd13d481aa18184603250608"; // Replace with your WeatherA
                 console.log("Error is: ", err)
             })
     }
-    
+
     function displayweather(data) {
     const { location, current, forecast } = data;
-
+    
+    if(current.temp_c > 40){
+        alert("This is a Red Region Area means Very High Temperature.")
+    }
+    if(current.temp_c < 10){
+        alert("Cold Area.")
+    }
     //current weather in div2
     div2.innerHTML = `
             <h2 class="text-white text-center font-bold text-2xl mb-4 transform transition-transform duration-300 hover:scale-150">${location.name},${location.country}</h2>
